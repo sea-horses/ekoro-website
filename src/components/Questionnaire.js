@@ -1,5 +1,6 @@
 import React from 'react';
 import store from '../store';
+import { changeQuestion } from '../actions/actionCreators'
 import Question from './Question';
 
 
@@ -9,26 +10,22 @@ class Questionnaire extends React.Component {
     }
 
     changeQuestion(index) {
-        const state = store.getState();
-        store.dispatch({
-            type: 'CHANGE_QUESTION',
-            index
-        });
+        store.dispatch(changeQuestion(index));
     }
 
     render() {
-        const state = store.getState();
+        let question = this.props.questions[this.props.currentQuestion - 1];
         return (
             <div className="questionnaire">
-                <Question questionId={state.currentQuestion} />
+                <Question question={question} />
 
-                {state.currentQuestion > 1 &&
-                    <button className="left" onClick={() => this.changeQuestion(state.currentQuestion - 1)} >
+                {this.props.currentQuestion > 1 &&
+                    <button className="left" onClick={() => this.changeQuestion(this.props.currentQuestion - 1)} >
                         previous
                     </button>
                 }
-                {state.currentQuestion < state.questions.length &&
-                    <button className="right" onClick={() => this.changeQuestion(state.currentQuestion + 1)}>
+                {this.props.currentQuestion < this.props.questions.length &&
+                    <button className="right" onClick={() => this.changeQuestion(this.props.currentQuestion + 1)}>
                         next
                 </button>
                 }
