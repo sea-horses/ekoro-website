@@ -4,18 +4,31 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import store from '../store';
 import * as actionCreators from '../actions/actionCreators';
+import { changeQuestion, addAnswer } from '../actions/actionCreators'
 import Question from './Question';
 import Questionnaire from './Questionnaire';
 import Result from './Result';
 
 class Main extends React.Component {
+
+    onQuestionChange(index) {
+        store.dispatch(changeQuestion(index));
+    }
+
+    onAnswer(questionId, answerId, event) {
+        console.log({ questionId, answerId, event });
+        //store.dispatch(addAnswer(questionId, answerId));
+    }
+
     render() {
         const state = store.getState();
         return (
             <div className="main">
                 <h1>main</h1>
                 <Route path="/questionnaire"
-                    component={() => <Questionnaire questions={state.questions} currentQuestion={state.currentQuestion} />} >
+                    component={() =>
+                        <Questionnaire questions={state.questions} currentQuestion={state.currentQuestion}
+                            onQuestionChange={this.onQuestionChange} onAnswer={this.onAnswer} />} >
                 </Route>
                 <Route path="/result" component={Result}></Route>
             </div>

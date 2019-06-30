@@ -5,3 +5,11 @@ export function changeQuestion(index) {
     index
   }
 }
+
+export function addAnswer(questionId, answerId) {
+  return {
+    type: 'ADD_ANSWER',
+    questionId,
+    answerId
+  }
+}
