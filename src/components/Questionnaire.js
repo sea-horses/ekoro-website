@@ -7,10 +7,12 @@ class Questionnaire extends React.Component {
 
     render() {
         let question = this.props.questions[this.props.currentQuestion - 1];
+        let existingAnswer = this.props.answers[this.props.currentQuestion];
         let selectedAnswer;
         return (
             <div className="questionnaire">
-                <Question question={question} onAnswerSelect={(e) => selectedAnswer = e.target.value} />
+                <Question question={question} existingAnswer={existingAnswer}
+                    onAnswerSelect={(e) => selectedAnswer = e.target.value} />
 
                 {this.props.currentQuestion > 1 &&
                     <button className="left" onClick={() => this.props.onQuestionChange(this.props.currentQuestion - 1)} >

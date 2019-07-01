@@ -17,7 +17,9 @@ class Main extends React.Component {
 
     onNext(questionId, answerId) {
         console.log({ questionId, answerId });
-        store.dispatch(addAnswer(questionId, answerId));
+        if (answerId) {
+            store.dispatch(addAnswer(questionId, answerId));
+        }
     }
 
     render() {
@@ -28,6 +30,7 @@ class Main extends React.Component {
                 <Route path="/questionnaire"
                     component={() =>
                         <Questionnaire questions={state.questions} currentQuestion={state.currentQuestion}
+                            answers={state.answers}
                             onQuestionChange={this.onQuestionChange} onNext={this.onNext} />} >
                 </Route>
                 <Route path="/result" component={Result}></Route>
