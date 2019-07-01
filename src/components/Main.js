@@ -1,11 +1,10 @@
 import React from 'react'
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import store from '../store';
 import * as actionCreators from '../actions/actionCreators';
 import { changeQuestion, addAnswer } from '../actions/actionCreators'
-import Question from './Question';
 import Questionnaire from './Questionnaire';
 import Result from './Result';
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { changeQuestion } from '../actions/actionCreators'
 import Question from './Question';
 
 
@@ -8,6 +7,7 @@ class Questionnaire extends React.Component {
     render() {
         let question = this.props.questions[this.props.currentQuestion - 1];
         let existingAnswer = this.props.answers[this.props.currentQuestion];
+        //let existingAnswer = this.props.answers.find((answer) => answer.questionId == this.props.currentQuestion);
         let selectedAnswer;
         return (
             <div className="questionnaire">
