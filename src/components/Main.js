@@ -4,7 +4,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import store from '../store';
 import * as actionCreators from '../actions/actionCreators';
-import { changeQuestion, addAnswer } from '../actions/actionCreators'
+import { changeQuestion, addAnswer } from '../actions/actionCreators';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
 import Questionnaire from './Questionnaire';
 import Result from './Result';
 
@@ -27,14 +29,41 @@ class Main extends React.Component {
 
     render() {
         const state = store.getState();
+        const GET_QUESTIONS = gql`
+        query {
+            getQuestions {
+              id,
+              label,
+              category,
+              answers {id, label}
+            }
+           }
+        `;
+
+        const questionnaire = () => (<Query query={GET_QUESTIONS}>
+            {({ loading, error, data }) => {
+                if (loading) return 'Loading...';
+                if (error) return `Error! ${error.message}`;
+
+                return (
+                    <Questionnaire questions={data.getQuestions} currentQuestion={state.currentQuestion}
+                        answers={state.answers}
+                        onQuestionChange={this.onQuestionChange} onNext={this.onNext} />
+                );
+            }}
+        </Query>);
+
+        const oldQuestionnaire = () => (
+            <Questionnaire questions={state.questions} currentQuestion={state.currentQuestion}
+                answers={state.answers}
+                onQuestionChange={this.onQuestionChange} onNext={this.onNext} />
+        );
+
         return (
             <div className="main">
                 <h1>main</h1>
                 <Route path="/questionnaire"
-                    component={() =>
-                        <Questionnaire questions={state.questions} currentQuestion={state.currentQuestion}
-                            answers={state.answers}
-                            onQuestionChange={this.onQuestionChange} onNext={this.onNext} />} >
+                    component={questionnaire} >
                 </Route>
                 <Route path="/result" component={Result}></Route>
             </div>
