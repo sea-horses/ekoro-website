@@ -10,6 +10,10 @@ import Result from './Result';
 
 class Main extends React.Component {
 
+    constructor() {
+        super();
+    }
+
     onQuestionChange(index) {
         store.dispatch(changeQuestion(index));
     }
@@ -36,7 +40,14 @@ class Main extends React.Component {
             </div>
         );
     }
+
+    componentWillMount() {
+        // Call Api
+        console.log({ env: process.env });
+    }
+
 };
+
 
 function mapStateToProps(state) {
     return {
