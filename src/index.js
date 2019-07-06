@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import ApolloClient from 'apollo-boost';
+import { apolloClient } from './apolloProxy';
 import { ApolloProvider } from 'react-apollo';
 import './index.css';
 
@@ -11,10 +12,10 @@ import store from './store';
 
 import * as serviceWorker from './serviceWorker';
 
-const client = new ApolloClient({ uri: process.env.REACT_APP_EKORO_API });
+//const client = new ApolloClient({ uri: process.env.REACT_APP_EKORO_API });
 
 const router = (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
         <Provider store={store}>
             <Router >
                 <Route path="/" component={Main}>

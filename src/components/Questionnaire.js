@@ -28,6 +28,15 @@ class Questionnaire extends React.Component {
                 </button>
                 }
 
+                {this.props.currentQuestion == this.props.questions.length &&
+                    <button className="right" onClick={() => {
+                        this.props.onNext(this.props.currentQuestion, selectedAnswer);
+                        this.props.onSubmit(this.props.answers);
+                    }}>
+                        submit
+                </button>
+                }
+
             </div >
         );
     }

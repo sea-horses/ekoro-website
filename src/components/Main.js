@@ -3,8 +3,7 @@ import { Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import store from '../store';
-import * as actionCreators from '../actions/actionCreators';
-import { changeQuestion, addAnswer } from '../actions/actionCreators';
+import { changeQuestion, addAnswer, sendAnswers } from '../actions/actionCreators';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Questionnaire from './Questionnaire';
@@ -37,7 +36,8 @@ class Main extends React.Component {
                 return (
                     <Questionnaire questions={data.getQuestions} currentQuestion={state.currentQuestion}
                         answers={state.answers}
-                        onQuestionChange={this.props.onQuestionChange} onNext={this.props.onNext} />
+                        onQuestionChange={this.props.onQuestionChange} onNext={this.props.onNext}
+                        onSubmit={this.props.onSubmit} />
                 );
             }}
         </Query>);
@@ -45,14 +45,15 @@ class Main extends React.Component {
         const oldQuestionnaire = () => (
             <Questionnaire questions={state.questions} currentQuestion={state.currentQuestion}
                 answers={state.answers}
-                onQuestionChange={this.props.onQuestionChange} onNext={this.props.onNext} />
+                onQuestionChange={this.props.onQuestionChange} onNext={this.props.onNext}
+                onSubmit={this.props.onSubmit} />
         );
 
         return (
             <div className="main">
                 <h1>main</h1>
                 <Route path="/questionnaire"
-                    component={oldQuestionnaire} >
+                    component={questionnaire} >
                 </Route>
                 <Route path="/result" component={Result}></Route>
             </div>
@@ -79,7 +80,8 @@ function mapDispachToProps(dispatch) {
     //return bindActionCreators(actionCreators, dispatch);
     return {
         onNext: (questionId, answerId) => { if (answerId) dispatch(addAnswer(questionId, answerId)); },
-        onQuestionChange: (index) => dispatch(changeQuestion(index))
+        onQuestionChange: (index) => dispatch(changeQuestion(index)),
+        onSubmit: (answers) => dispatch(sendAnswers(answers))
     }
 }
 
