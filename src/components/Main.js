@@ -16,17 +16,6 @@ class Main extends React.Component {
         super();
     }
 
-    onQuestionChange(index) {
-        store.dispatch(changeQuestion(index));
-    }
-
-    onNext(questionId, answerId) {
-        console.log({ questionId, answerId });
-        if (answerId) {
-            store.dispatch(addAnswer(questionId, answerId));
-        }
-    }
-
     render() {
         const state = store.getState();
         const GET_QUESTIONS = gql`
@@ -48,7 +37,7 @@ class Main extends React.Component {
                 return (
                     <Questionnaire questions={data.getQuestions} currentQuestion={state.currentQuestion}
                         answers={state.answers}
-                        onQuestionChange={this.onQuestionChange} onNext={this.onNext} />
+                        onQuestionChange={this.props.onQuestionChange} onNext={this.props.onNext} />
                 );
             }}
         </Query>);
@@ -56,14 +45,14 @@ class Main extends React.Component {
         const oldQuestionnaire = () => (
             <Questionnaire questions={state.questions} currentQuestion={state.currentQuestion}
                 answers={state.answers}
-                onQuestionChange={this.onQuestionChange} onNext={this.onNext} />
+                onQuestionChange={this.props.onQuestionChange} onNext={this.props.onNext} />
         );
 
         return (
             <div className="main">
                 <h1>main</h1>
                 <Route path="/questionnaire"
-                    component={questionnaire} >
+                    component={oldQuestionnaire} >
                 </Route>
                 <Route path="/result" component={Result}></Route>
             </div>
@@ -87,7 +76,12 @@ function mapStateToProps(state) {
 }
 
 function mapDispachToProps(dispatch) {
-    return bindActionCreators(actionCreators, dispatch);
+    //return bindActionCreators(actionCreators, dispatch);
+    return {
+        onNext: (questionId, answerId) => { if (answerId) dispatch(addAnswer(questionId, answerId)); },
+        onQuestionChange: (index) => dispatch(changeQuestion(index))
+    }
 }
 
 export default connect(mapStateToProps, mapDispachToProps)(Main);
+//export default Main;
