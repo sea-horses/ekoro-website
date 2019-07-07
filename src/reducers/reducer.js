@@ -23,6 +23,12 @@ export default function reducer(state = {}, action = {}) {
                 answers
             }
         };
+        case 'GET_RESULT': {
+            return {
+                ...state,
+                result: action.result
+            }
+        }
         default: return state;
     }
 }

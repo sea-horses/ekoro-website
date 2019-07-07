@@ -55,7 +55,7 @@ class Main extends React.Component {
                 <Route path="/questionnaire"
                     component={questionnaire} >
                 </Route>
-                <Route path="/result" component={Result}></Route>
+                <Route path="/result" component={() => <Result result={state.result} />}></Route>
             </div>
         );
     }
@@ -72,7 +72,8 @@ function mapStateToProps(state) {
     return {
         questions: state.questions,
         currentQuestion: state.currentQuestion,
-        answers: state.answers
+        answers: state.answers,
+        result: state.result
     }
 }
 

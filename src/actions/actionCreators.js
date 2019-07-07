@@ -23,7 +23,7 @@ export function loadQuestions() {
 export function sendAnswers(answers) {
   const sentAnswers = [];
   Object.keys(answers).map(function (key) {
-    sentAnswers.push({ questionId: key, answerId: answers[key] })
+    sentAnswers.push({ questionId: parseInt(key), answerId: parseInt(answers[key]) })
   });
   return {
     type: 'SEND_ANSWERS',

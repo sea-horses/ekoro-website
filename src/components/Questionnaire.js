@@ -1,6 +1,6 @@
 import React from 'react';
 import Question from './Question';
-
+import { Link } from 'react-router-dom';
 
 class Questionnaire extends React.Component {
 
@@ -26,11 +26,13 @@ class Questionnaire extends React.Component {
                 }
 
                 {this.props.currentQuestion == this.props.questions.length &&
-                    <button className="right" onClick={() => {
-                        this.props.onSubmit(this.props.answers);
-                    }}>
-                        submit
-                </button>
+                    <Link to="/result">
+                        <button className="right" onClick={() => {
+                            this.props.onSubmit(this.props.answers);
+                        }}>
+                            submit
+                        </button>
+                    </Link>
                 }
 
             </div >
