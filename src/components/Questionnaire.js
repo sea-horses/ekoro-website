@@ -18,7 +18,7 @@ class Questionnaire extends React.Component {
                     </button>
                 }
                 {this.props.currentQuestion < this.props.questions.length &&
-                    <button className="right" onClick={() => {
+                    <button className="right" disabled={!existingAnswer} onClick={() => {
                         this.props.onQuestionChange(this.props.currentQuestion + 1);
                     }}>
                         next
