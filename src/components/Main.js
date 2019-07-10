@@ -16,7 +16,6 @@ class Main extends React.Component {
     }
 
     render() {
-        const state = store.getState();
         const GET_QUESTIONS = gql`
         query {
             getQuestions {
@@ -34,8 +33,8 @@ class Main extends React.Component {
                 if (error) return `Error! ${error.message}`;
 
                 return (
-                    <Questionnaire questions={data.getQuestions} currentQuestion={state.currentQuestion}
-                        answers={state.answers}
+                    <Questionnaire questions={data.getQuestions} currentQuestion={this.props.currentQuestion}
+                        answers={this.props.answers}
                         onQuestionChange={this.props.onQuestionChange} onNext={this.props.onNext}
                         onSubmit={this.props.onSubmit} />
                 );
@@ -43,8 +42,8 @@ class Main extends React.Component {
         </Query>);
 
         const oldQuestionnaire = () => (
-            <Questionnaire questions={state.questions} currentQuestion={state.currentQuestion}
-                answers={state.answers}
+            <Questionnaire questions={this.props.questions} currentQuestion={this.props.currentQuestion}
+                answers={this.props.answers}
                 onQuestionChange={this.props.onQuestionChange} onNext={this.props.onNext}
                 onSubmit={this.props.onSubmit} />
         );
@@ -55,7 +54,7 @@ class Main extends React.Component {
                 <Route path="/questionnaire"
                     component={questionnaire} >
                 </Route>
-                <Route path="/result" component={() => <Result result={state.result} />}></Route>
+                <Route path="/result" component={() => <Result result={this.props.result} />}></Route>
             </div>
         );
     }
