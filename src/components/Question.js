@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Question extends React.Component {
 
@@ -27,5 +28,10 @@ class Question extends React.Component {
     }
 
 };
+
+Question.propTypes = {
+    question: PropTypes.object.isRequired,
+    onAnswerSelect: PropTypes.func.isRequired,
+}
 
 export default Question;

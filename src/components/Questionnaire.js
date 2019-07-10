@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Question from './Question';
 import { Link } from 'react-router-dom';
 
@@ -39,6 +40,20 @@ class Questionnaire extends React.Component {
         );
     }
 
+}
+
+Questionnaire.propTypes = {
+    questions: PropTypes.array.isRequired,
+    currentQuestion: PropTypes.number,
+    answers: PropTypes.object,
+    onQuestionChange: PropTypes.func.isRequired,
+    onNext: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+}
+
+Questionnaire.defaultProps = {
+    currentQuestion: 1,
+    answers: {}
 }
 
 export default Questionnaire;

@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class Result extends React.Component {
     render() {
@@ -7,7 +8,7 @@ class Result extends React.Component {
             <div className="result">
                 {
                     result && result.map((subResult) =>
-                        <div className="category">
+                        <div key={subResult.category} className="category">
                             <span>{subResult.category} : {subResult.value}</span>
                         </div>
                     )
@@ -17,5 +18,13 @@ class Result extends React.Component {
         );
     }
 };
+
+Result.propTypes = {
+    result: PropTypes.array,
+}
+
+Result.defaultProps = {
+    result: []
+}
 
 export default Result;
