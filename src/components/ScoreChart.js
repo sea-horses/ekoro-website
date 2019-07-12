@@ -4,8 +4,9 @@ import { VictoryChart, VictoryTheme, VictoryArea, VictoryPolarAxis, VictoryLabel
 
 class ScoreChart extends React.Component {
     render() {
-        const maxima = this.getMaxima(this.props.scoreData);
-        const data = this.processData(this.props.scoreData);
+        const scoreData = this.props.scoreData;
+        const maxima = this.getMaxima(scoreData);
+        const data = this.processData(scoreData);
         console.log({ data, maxima });
         return (
 
@@ -25,14 +26,14 @@ class ScoreChart extends React.Component {
                                         axisLabel: { padding: 30 },
                                         axis: { stroke: "none" },
                                         grid: { stroke: "grey", strokeWidth: 0.25, opacity: 0.5 },
-                                        tickLabels: { padding: 200 }
+                                        tickLabels: { padding: 10 }
                                     }}
                                     tickLabelComponent={
                                         <VictoryLabel labelPlacement="vertical" />
                                     }
                                     labelPlacement="perpendicular"
                                     axisValue={i + 1} label={key}
-                                    tickFormat={(t) => ""}
+                                    tickFormat={(t) => scoreData[key]}
                                     tickValues={[1]}
                                 />
                             );

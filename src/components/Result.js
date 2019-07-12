@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { VictoryChart, VictoryTheme, VictoryArea, VictoryPolarAxis } from 'victory';
 import ScoreChart from './ScoreChart';
+import SuggestedActions from './SuggestedActions';
 
 class Result extends React.Component {
     render() {
@@ -23,17 +23,12 @@ class Result extends React.Component {
                     <ScoreChart scoreData={chartData} maxScore={maxScore} />
                 }
 
-                {
-                    result && result.map((subResult) =>
-                        <div key={subResult.category} className="category">
-                            <span>{subResult.category} : {subResult.value}</span>
-                        </div>
-                    )
-                }
+                <SuggestedActions result={result} />
 
             </div>
         );
     }
+
 };
 
 Result.propTypes = {
