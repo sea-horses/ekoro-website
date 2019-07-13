@@ -8,6 +8,7 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Questionnaire from './Questionnaire';
 import Result from './Result';
+import Container from '@material-ui/core/Container';
 
 class Main extends React.Component {
 
@@ -49,13 +50,13 @@ class Main extends React.Component {
         );
 
         return (
-            <div className="main">
-                <h1>main</h1>
+            <Container maxWidth="md">
+                <h1>Ekoro</h1>
                 <Route path="/questionnaire"
                     component={questionnaire} >
                 </Route>
                 <Route path="/result" component={() => <Result result={this.props.result} />}></Route>
-            </div>
+            </Container>
         );
     }
 
