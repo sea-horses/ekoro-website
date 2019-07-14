@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Grid from '@material-ui/core/Grid';
 import ScoreChart from './ScoreChart';
 import SuggestedActions from './SuggestedActions';
 
@@ -19,11 +20,20 @@ class Result extends React.Component {
 
         return (
             <div className="result">
-                {result &&
-                    <ScoreChart scoreData={chartData} maxScore={maxScore} />
-                }
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={4}>
+                        {result &&
+                            <ScoreChart scoreData={chartData} maxScore={maxScore} />
+                        }
+                    </Grid>
+                    <Grid item xs={12} sm={8}>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <SuggestedActions result={result} />
+                    </Grid>
 
-                <SuggestedActions result={result} />
+                </Grid>
+
 
             </div>
         );

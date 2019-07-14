@@ -17,7 +17,7 @@ function* getResult(action) {
             }
         }
         `;
-    yield (delay(500));
+    //yield (delay(500));
     //call graphQl mutation
     let result = yield apolloClient.mutate({
         mutation: COMPUTE_ANSWERS,
