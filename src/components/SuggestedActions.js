@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -7,12 +7,13 @@ import Grid from '@material-ui/core/Grid';
 
 export default function SuggestedActions(props) {
     const result = props.result;
-    const [value, setValue] = React.useState(0);
+    const [tabIndex, setTabIndex] = useState(0);
+    const [selectedAction, setSelectedAction] = useState();
 
     return (
         <div className="suggestedActions">
             <AppBar position="static">
-                <Tabs value={value} onChange={changeTab}>
+                <Tabs value={tabIndex} onChange={changeTab}>
                     {
                         result && result.map((subResult) =>
                             <Tab key={subResult.category} label={subResult.category} />
@@ -23,7 +24,14 @@ export default function SuggestedActions(props) {
             <Grid container spacing={3}>
                 <Grid item xs={6}>
                     ACTIONS LIST
-            </Grid>
+                    {
+                        result[tabIndex] && result[tabIndex].suggestions.map((suggestion) =>
+                            <div key={suggestion.id} className="suggestion">
+                                <div>{suggestion.label}</div>
+                            </div>
+                        )
+                    }
+                </Grid>
                 <Grid item xs={6}>
                     ACTIONS DETAIL
             </Grid>
@@ -34,7 +42,7 @@ export default function SuggestedActions(props) {
     );
 
     function changeTab(event, newValue) {
-        setValue(newValue);
+        setTabIndex(newValue);
     }
 
 };
