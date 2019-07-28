@@ -16,9 +16,31 @@ function* getQuestions() {
         }
        }
     `;
-    let result = yield apolloClient.query({
+    /*let result = yield apolloClient.query({
         query: GET_QUESTIONS
     });
+
+    console.log({ questions: result.data.getQuestions });
+    yield put({ type: 'QUESTIONS_LOADED', questions: result.data.getQuestions });
+    */
+
+    //FIXME workaround not using apollo client for now because of bug
+    let response = yield fetch('https://ekoro-api.herokuapp.com/graphql', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            query: `{
+            getQuestions {
+                id,
+                label,
+                category,
+                answers {id, label}
+              }
+         }` }),
+    });
+
+    let result = yield response.json();
+
     console.log({ questions: result.data.getQuestions });
     yield put({ type: 'QUESTIONS_LOADED', questions: result.data.getQuestions });
 
