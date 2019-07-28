@@ -8,8 +8,15 @@ class Questionnaire extends React.Component {
     render() {
         let question = this.props.questions[this.props.currentQuestion - 1];
         let existingAnswer = this.props.answers[this.props.currentQuestion];
+
+        //FIX ME
+        if (!question) {
+            return <div className="questionnaire"></div>
+        }
+
         return (
             <div className="questionnaire">
+
                 <Question question={question} existingAnswer={existingAnswer}
                     onAnswerSelect={(e) => this.props.onNext(this.props.currentQuestion, e.target.value)} />
 

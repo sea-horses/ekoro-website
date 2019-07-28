@@ -5,7 +5,23 @@ import { Query } from 'react-apollo';
 import { apolloClient } from './apolloProxy';
 
 function* getQuestions() {
-    console.log("Get Questions");
+    console.log("######### Get Questions ###########");
+    const GET_QUESTIONS = gql`
+    query {
+        getQuestions {
+          id,
+          label,
+          category,
+          answers {id, label}
+        }
+       }
+    `;
+    let result = yield apolloClient.query({
+        query: GET_QUESTIONS
+    });
+    console.log({ questions: result.data.getQuestions });
+    yield put({ type: 'QUESTIONS_LOADED', questions: result.data.getQuestions });
+
 }
 
 function* getResult(action) {

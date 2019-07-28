@@ -18,7 +18,7 @@ const enhancers = compose(
 );
 
 const defaultState = {
-    questions,
+    questions: [],
     answers: {},
     currentQuestion: 1
 }

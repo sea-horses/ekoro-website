@@ -59,6 +59,14 @@ export default function reducer(state = {}, action = {}) {
                 result: action.result
             }
         }
+        case 'QUESTIONS_LOADED': {
+            console.log("########### QUESTIONS LOADED ###########");
+            console.log({ action });
+            return {
+                ...state,
+                questions: action.questions
+            }
+        }
         default: return state;
     }
 }
