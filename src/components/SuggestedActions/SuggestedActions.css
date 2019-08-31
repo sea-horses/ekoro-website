@@ -1,0 +1,8 @@
+.suggestion {
+    margin: 10px;
+    cursor: pointer;
+}
+
+.suggestion:hover {
+    color:blue;
+}

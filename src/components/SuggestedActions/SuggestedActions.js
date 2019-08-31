@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
+import './SuggestedActions.css';
 
 export default function SuggestedActions(props) {
     const result = props.result;
@@ -27,14 +28,20 @@ export default function SuggestedActions(props) {
                     {
                         result[tabIndex] && result[tabIndex].suggestions.map((suggestion) =>
                             <div key={suggestion.id} className="suggestion">
-                                <div>{suggestion.label}</div>
+                                <div onClick={()=> setSelectedAction(suggestion)}>{suggestion.label}</div>
                             </div>
                         )
                     }
                 </Grid>
                 <Grid item xs={6}>
                     ACTIONS DETAIL
-            </Grid>
+                    {
+                        selectedAction && 
+                        <div>
+                            {selectedAction.detail}
+                        </div>
+                    }
+                </Grid>
             </Grid>
         </div>
 
@@ -43,6 +50,7 @@ export default function SuggestedActions(props) {
 
     function changeTab(event, newValue) {
         setTabIndex(newValue);
+        setSelectedAction(null);
     }
 
 };
