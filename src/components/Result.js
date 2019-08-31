@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import ScoreChart from './ScoreChart';
-import SuggestedActions from './SuggestedActions';
+import SuggestedActions from './SuggestedActions/SuggestedActions';
 
 class Result extends React.Component {
     render() {
